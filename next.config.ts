@@ -11,6 +11,7 @@ const nextConfig: NextConfig = {
   basePath,
   assetPrefix: basePath || undefined,
   images: {
+    // 静态导出需 unoptimized；子路径部署下图片前缀在组件里用 withBasePath 手动补（见 src/lib/basePath.ts）。
     unoptimized: true,
   },
   /* config options here */

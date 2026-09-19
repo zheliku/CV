@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import { withBasePath } from '@/lib/basePath';
 import { Code2, ExternalLink, FileText } from 'lucide-react';
 import FormattedBibTeXText from './FormattedBibTeXText';
 import Tag from '@/components/ui/Tag';
@@ -62,7 +63,7 @@ export default function PublicationCard({ publication }: { publication: Publicat
             <div className="publication-visual">
                 {cover ? (
                     <Image
-                        src={cover}
+                        src={withBasePath(cover)}
                         alt={publication.title}
                         width={640}
                         height={400}

@@ -10,6 +10,7 @@ import type { SiteConfig } from '@/lib/config';
 import { organizationEntityKeys } from '@/lib/externalEntities';
 import { useLocaleStore } from '@/lib/stores/localeStore';
 import { useMessages } from '@/lib/i18n/useMessages';
+import { withBasePath } from '@/lib/basePath';
 
 // Custom ORCID icon (lucide has no brand mark).
 const OrcidIcon = ({ size = 17 }: { size?: number }) => (
@@ -129,7 +130,7 @@ export default function Profile({ author, social, features }: ProfileProps) {
         >
             <div className="profile-portrait">
                 <Image
-                    src={author.avatar}
+                    src={withBasePath(author.avatar)}
                     alt={`Portrait of ${author.name}`}
                     fill
                     className="object-cover object-[32%_center]"

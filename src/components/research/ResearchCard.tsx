@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { withBasePath } from '@/lib/basePath';
 import { ExternalLink } from 'lucide-react';
 import ActionLinks from '@/components/ui/ActionLinks';
 import Tag from '@/components/ui/Tag';
@@ -28,7 +29,7 @@ export default function ResearchCard({ item }: { item: CardItem }) {
                     {imageList.map((src, index) => (
                         <Image
                             key={`${src}-${index}`}
-                            src={src}
+                            src={withBasePath(src)}
                             alt={`${item.teaser_label || item.title}${imageList.length > 1 ? ` (${index + 1}/${imageList.length})` : ''}`}
                             width={640}
                             height={400}
