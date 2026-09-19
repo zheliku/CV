@@ -1,12 +1,11 @@
 name: Deploy PRISM to GitHub Pages
 
 on:
-  # Push triggers are disabled by default for template users.
-  # Uncomment the lines below to enable automatic deployment on push.
-  # push:
-  #  branches: 
-  #      - main
-  #      - ci
+  # 推送到以下分支时自动部署到 GitHub Pages（项目站点）。
+  push:
+    branches:
+      - main
+  # 也可在 Actions 页面手动触发。
   workflow_dispatch:
 
 permissions:
@@ -32,6 +31,10 @@ jobs:
         run: npm install
 
       - name: Build site
+        env:
+          # 项目站点位于 https://<user>.github.io/<repo>/，用仓库名作为 basePath 前缀。
+          # 若你的仓库名为 <user>.github.io（用户站点），请把下行改为空字符串 ""。
+          NEXT_PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
         run: npm run build
 
       - name: Upload artifact

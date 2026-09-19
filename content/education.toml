@@ -1,0 +1,22 @@
+type = "card"
+variant = "compact"
+title = "Education"
+description = "Study and research background."
+
+[[items]]
+title = "Beijing Normal University"
+date = "Project 985 · Project 211 · Double First-Class"
+subtitle = "Computer Science and Technology · Ph.D."
+content = "School of Artificial Intelligence · Beijing, China · 2025–present"
+
+[[items]]
+title = "Beijing Normal University"
+date = "Project 985 · Project 211 · Double First-Class"
+subtitle = "Computer Science and Technology · M.Sc."
+content = "School of Artificial Intelligence · Beijing, China · 2023–2025"
+
+[[items]]
+title = "Beijing Normal University"
+date = "Project 985 · Project 211 · Double First-Class"
+subtitle = "Computer Science and Technology · B.Sc."
+content = "School of Artificial Intelligence · Beijing, China · 2019–2023"

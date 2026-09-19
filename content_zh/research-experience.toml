@@ -1,0 +1,27 @@
+type = "card"
+variant = "timeline"
+date_position = "header"
+title = "研究经历"
+description = "在 XR、具身交互与人机协作方向的当前及近期研究任职。"
+
+[[items]]
+eyebrow = "当前任职"
+title = "FIT-AWE Lab，香港科技大学（广州）"
+subtitle = "Safe Passage：面向公共 VR 体感游戏的叙事内安全事件"
+role = "研究助理"
+advisor = "导师：梁海宁 教授"
+date = "2026 年 7 月–至今"
+status = "准备投稿 IEEE VR 2027"
+content = "为公共体感游戏设计并开发基于 Unity 的 VR 安全机制与实验框架，涵盖行为安全、游戏连续性与主观体验指标。"
+tags = ["扩展现实", "具身交互", "VR 安全"]
+
+# [[items]]
+# eyebrow = "近期任职"
+# title = "叙事空间工作室，香港城市大学"
+# subtitle = "与 28 位设计师开展的多 GenAI 创意工作流研究"
+# role = "研究助理"
+# advisor = "导师：Ray LC 教授"
+# date = "2026 年 4 月–2026 年 7 月"
+# status = "准备投稿 ACM CHI 2027"
+# content = "参与文献综述、质性数据采集与分析、论文撰写，以及面向发表的研究可视化，研究设计师如何协调多种 GenAI 工具。"
+# tags = ["人机协作", "生成式 AI", "质性研究"]

@@ -1,0 +1,32 @@
+type = "card"
+variant = "clusters"
+title = "Skills & Methods"
+description = "A research practice spanning system building, empirical study, and interaction design."
+
+[[items]]
+title = "Technical Skills"
+tags = [
+    "Python / Unity / C# / C++",
+    "Software / Game Development",
+    "VR / AR / MR Systems",
+    "Meta Quest 3 / Pico 4 / HTC VIVE",
+    "AI-assisted Coding",
+    "Gesture / Sensor Interaction",
+    "Information / Data Visualization",
+]
+
+[[items]]
+title = "Research Skills"
+tags = [
+    "User Research",
+    "Experiment & Survey Design",
+    "Semi-Structured Interviews",
+    "Usability Evaluation",
+    "Mixed-Methods Analysis",
+    "Behavioral Data Analysis",
+    "System Evaluation",
+]
+
+[[items]]
+title = "Personal Interests"
+tags = ["Frontiers of AI", "Programming", "Badminton", "Reading", "Music"]

@@ -1,0 +1,22 @@
+type = "card"
+variant = "compact"
+title = "教育背景"
+description = "学习与研究经历。"
+
+[[items]]
+title = "北京师范大学"
+date = "985工程 · 211工程 · 双一流"
+subtitle = "计算机科学与技术 · 博士"
+content = "人工智能学院 · 中国，北京 · 2025–至今"
+
+[[items]]
+title = "北京师范大学"
+date = "985工程 · 211工程 · 双一流"
+subtitle = "计算机科学与技术 · 硕士"
+content = "人工智能学院 · 中国，北京 · 2023–2025"
+
+[[items]]
+title = "北京师范大学"
+date = "985工程 · 211工程 · 双一流"
+subtitle = "计算机科学与技术 · 本科"
+content = "人工智能学院 · 中国，北京 · 2019–2023"

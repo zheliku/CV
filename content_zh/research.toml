@@ -1,0 +1,89 @@
+type = "card"
+variant = "research"
+title = "研究项目"
+description = "围绕沉浸式 VR/MR 的触觉交互与具身学习。"
+
+[[items]]
+eyebrow = "当前研究 · Passthrough MR"
+title = "EgoAnchor: Zero-Shot Dynamic Anchoring of Everyday Objects in Passthrough Mixed Reality"
+affiliation = "北京师范大学 · 人工智能学院"
+role = "第一作者"
+advisor = "导师：骆岩林教授/张鸿文副教授"
+date = "2025.09 – 2026.08"
+status = "在投 IEEE VR 2027"
+content = "EgoAnchor 将零样本 6-DoF 位姿估计的异步、低频、不稳观测，转化为透视 MR 中连续、稳定、可恢复的物体锚定：感知后端串联开放词汇检测、时序分割、立体深度与位姿估计并以 VCD 打分，运行时用采集时刻对齐、卡尔曼滤波与插值合成渲染同步的锚定，并以 StaticLock 抑制静止抖动、遮挡后重采集。基于 Meta Quest 3 与 Unity 实现，受控基准、消融与 24 人用户实验显示其静态配准、遮挡恢复与轨迹残差均优于基线。"
+metrics = ["头部运动耦合误差", "遮挡恢复误差", "N=24 被试内用户实验", "国家自然科学基金（No. 62377004）"]
+tags = ["透视混合现实", "零样本 6-DoF 位姿估计", "动态物体锚定"]
+methods = [
+    "Meta Quest 3",
+    "Unity",
+    "C#",
+    "FoundationPose",
+    "YOLOE",
+    "Cutie",
+    "Fast-FoundationStereo",
+    "Kalman 滤波",
+    "ZeroMQ / NATS",
+]
+teaser = "EGO-01"
+teaser_label = "透视 MR 中日常物体的零样本动态锚定"
+images = ["/research/26egoanchor-01.png", "/research/26egoanchor-02.webp"]
+
+[[items]]
+eyebrow = "具身学习 · 一致性触觉"
+title = "MomentumTouch: How Consistent Haptic Feedback Empowers VR Embodied Learning through Cognitive Resource Reconstruction"
+title_link = "https://doi.org/10.1145/3772318.3791751"
+affiliation = "北京师范大学 · 人工智能学院"
+role = "第一作者"
+advisor = "导师：骆岩林教授/张鸿文副教授"
+date = "2024.03 – 2025.09"
+status = "ACM CHI 2026"
+content = "MomentumTouch 面向高中物理“动量守恒”，以低成本 3D 打印装置（滑块+弹簧、旋钮、按钮）配合 Meta Quest 3，提供同时满足物理相似性与动态同位的一致性触觉反馈。在真实课堂对 64 名高二学生开展被试间混合方法实验（知识前后测、认知负荷、ARCS 动机、沉浸感、64 通道 EEG、访谈）。结果揭示“认知资源重构”：一致性触觉显著降低外在认知负荷、提升生成性负荷，动机与沉浸感明显提升，而短期知识增益未达显著，体现为概念落地与迁移准备度的增强。"
+metrics = [
+    "N=64 高中课堂现场实验",
+    "64 通道 EEG 三角验证",
+    "ECL ↓ · GCL ↑",
+    "国家自然科学基金（No. 62377004）",
+]
+tags = ["具身学习", "一致性触觉反馈", "VR STEM 教育"]
+methods = ["Unity", "Meta Quest 3", "3D 打印触觉装置", "Arduino", "EEG", "混合方法研究"]
+actions = [
+    { label = "论文", href = "https://doi.org/10.1145/3772318.3791751", type = "paper" },
+    { label = "代码", href = "https://github.com/zheliku/MomentumTouch", type = "code" },
+]
+teaser = "MOM-02"
+teaser_label = "一致性触觉与认知资源重构"
+images = ["/research/26momentumtouch-01.webp", "/research/26momentumtouch-02.webp", "/research/26momentumtouch-03.webp"]
+
+[[items]]
+eyebrow = "触觉框架 · 模块化代理"
+title = "PhysicsHap: A Modular Haptic Interaction Framework for Enhancing Student Learning in Immersive Virtual Physics Experiments"
+title_link = "https://doi.org/10.1109/TVCG.2026.3679917"
+affiliation = "北京师范大学 · 人工智能学院"
+role = "第二作者"
+advisor = "导师：骆岩林教授/张鸿文副教授"
+date = "2024.03 – 2026.09"
+status = "IEEE TVCG 2026"
+content = "PhysicsHap 是面向虚拟物理实验、快速搭建可重构触觉代理的模块化框架：对 45 个中学物理实验做系统分析，把触觉解耦为皮肤觉（形状/纹理）与动觉（力/阻尼），组合被动 Tangible Body 与主动 Force Engine（无刷电机+磁编码器，平动/转动/振动），并以 Quest 3 手部跟踪实现免外部追踪器的物理-虚拟同步。64 人随机对照实验显示，相较手势交互它显著提升实验知识与综合能力、优化认知负荷（ECL↓、GCL↑）并提升学习动机。"
+metrics = [
+    "45 个中学物理实验交互分析",
+    "N=64 随机对照实验",
+    "综合能力 · 动机分析",
+    "国家自然科学基金（No. 62377004）",
+]
+tags = ["模块化触觉代理", "沉浸式虚拟物理实验", "力反馈"]
+methods = [
+    "Unity",
+    "Meta Quest 3 手部跟踪",
+    "BLDC 电机 + SimpleFOC",
+    "AS5600 编码器",
+    "3D 打印",
+    "Arduino",
+]
+actions = [
+    { label = "论文", href = "https://doi.org/10.1109/TVCG.2026.3679917", type = "paper" },
+    { label = "代码", href = "https://github.com/lyh-12/PhysicsHap", type = "code" },
+]
+teaser = "PHY-03"
+teaser_label = "面向虚拟物理实验的模块化触觉框架"
+images = ["/research/26physicshap-01.png", "/research/26physicshap-02.png"]

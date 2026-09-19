@@ -1,91 +1,138 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import ReactMarkdown from 'react-markdown';
-import { CardPageConfig } from '@/types/page';
+import ResearchCard from '@/components/research/ResearchCard';
+import SectionHeading from '@/components/ui/SectionHeading';
+import Tag from '@/components/ui/Tag';
+import ActionLinks from '@/components/ui/ActionLinks';
+import AwardsList from '@/components/pages/AwardsList';
+import { ExternalEntityText } from '@/components/ui/ExternalEntityLink';
+import type { CardItem, CardPageConfig } from '@/types/page';
+import { facultyEntityKeys, organizationEntityKeys } from '@/lib/externalEntities';
 
-const markdownComponents = {
-    p: ({ children }: React.ComponentProps<'p'>) => <p className="mb-3 last:mb-0">{children}</p>,
-    ul: ({ children }: React.ComponentProps<'ul'>) => <ul className="list-disc list-inside mb-3 space-y-1">{children}</ul>,
-    ol: ({ children }: React.ComponentProps<'ol'>) => <ol className="list-decimal list-inside mb-3 space-y-1">{children}</ol>,
-    li: ({ children }: React.ComponentProps<'li'>) => <li className="mb-1">{children}</li>,
-    a: ({ ...props }) => (
-        <a
-            {...props}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-accent font-medium transition-all duration-200 rounded hover:bg-accent/10 hover:shadow-sm"
-        />
-    ),
-    blockquote: ({ children }: React.ComponentProps<'blockquote'>) => (
-        <blockquote className="border-l-4 border-accent/50 pl-4 italic my-4 text-neutral-600 dark:text-neutral-500">
-            {children}
-        </blockquote>
-    ),
-    strong: ({ children }: React.ComponentProps<'strong'>) => <strong className="font-semibold text-primary">{children}</strong>,
-    em: ({ children }: React.ComponentProps<'em'>) => <em className="italic">{children}</em>,
-    code: ({ children }: React.ComponentProps<'code'>) => (
-        <code className="px-1.5 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 text-[0.95em]">{children}</code>
-    ),
-};
+function ItemMetadata({ item }: { item: CardItem }) {
+    const values = [item.role, item.advisor, item.location].filter(Boolean);
+    if (!values.length) return null;
+    return (
+        <p className="timeline-metadata">
+            <ExternalEntityText entities={facultyEntityKeys}>{values.join(' · ')}</ExternalEntityText>
+        </p>
+    );
+}
 
-export default function CardPage({ config, embedded = false }: { config: CardPageConfig; embedded?: boolean }) {
+function TimelineItem({ item, datePosition = 'aside' }: { item: CardItem; datePosition?: CardPageConfig['date_position'] }) {
+    const headerDate = datePosition === 'header';
+
+    return (
+        <article className={`timeline-item${headerDate ? ' timeline-item--header-date' : ''}`}>
+            {!headerDate && item.date && <div className="timeline-date">{item.date}</div>}
+            <div className="timeline-body">
+                <div className="timeline-heading-row">
+                    <div className="timeline-heading-main">
+                        {item.eyebrow && <span className="eyebrow">{item.eyebrow}</span>}
+                        <h3 className="timeline-title">
+                            <ExternalEntityText entities={organizationEntityKeys}>{item.title}</ExternalEntityText>
+                        </h3>
+                    </div>
+                    {headerDate && item.date && <div className="timeline-date">{item.date}</div>}
+                    {item.status && <span className="status-label">{item.status}</span>}
+                </div>
+                {item.subtitle && <p className="timeline-subtitle">{item.subtitle}</p>}
+                <ItemMetadata item={item} />
+                {item.content && <p className="timeline-summary">{item.content}</p>}
+                {item.bullets && item.bullets.length > 0 && (
+                    <ul className="timeline-bullets">
+                        {item.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}
+                    </ul>
+                )}
+                {item.tags && item.tags.length > 0 && (
+                    <div className="tag-row">{item.tags.map((tag) => <Tag key={tag}>{tag}</Tag>)}</div>
+                )}
+                {item.methods && item.methods.length > 0 && (
+                    <div className="tag-row">{item.methods.map((method) => <Tag key={method} variant="method">{method}</Tag>)}</div>
+                )}
+                <ActionLinks actions={item.actions} />
+            </div>
+        </article>
+    );
+}
+
+function CompactItem({ item, variant }: { item: CardItem; variant: CardPageConfig['variant'] }) {
+    const cluster = variant === 'clusters';
+    return (
+        <article className={cluster ? 'cluster-item' : 'compact-item'}>
+            <div className="compact-heading-row">
+                <div>
+                    {item.eyebrow && <span className="eyebrow">{item.eyebrow}</span>}
+                    <h3 className="compact-title">
+                        <ExternalEntityText entities={organizationEntityKeys}>{item.title}</ExternalEntityText>
+                    </h3>
+                </div>
+                {item.date && <span className="compact-date">{item.date}</span>}
+            </div>
+            {item.subtitle && <p className="compact-subtitle">{item.subtitle}</p>}
+            <ItemMetadata item={item} />
+            {item.content && <p className="compact-summary">{item.content}</p>}
+            {item.bullets && item.bullets.length > 0 && (
+                <ul className="compact-bullets">{item.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}</ul>
+            )}
+            {item.tags && item.tags.length > 0 && (
+                <div className="tag-row">{item.tags.map((tag) => <Tag key={tag} variant={cluster ? 'method' : 'research'}>{tag}</Tag>)}</div>
+            )}
+            <ActionLinks actions={item.actions} />
+        </article>
+    );
+}
+
+export default function CardPage({
+    config,
+    embedded = false,
+    showHeading = true,
+}: {
+    config: CardPageConfig;
+    embedded?: boolean;
+    showHeading?: boolean;
+}) {
+    const variant = config.variant || 'compact';
+
     return (
         <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.05 }}
+            transition={{ duration: 0.45 }}
         >
-            <div className={embedded ? "mb-4" : "mb-8"}>
-                <h1 className={`${embedded ? "text-2xl" : "text-4xl"} font-serif font-bold text-primary mb-4`}>{config.title}</h1>
-                {config.description && (
-                    <div className={`${embedded ? "text-base" : "text-lg"} text-neutral-600 dark:text-neutral-500 max-w-2xl leading-relaxed`}>
-                        <ReactMarkdown components={markdownComponents}>
-                            {config.description}
-                        </ReactMarkdown>
-                    </div>
-                )}
-            </div>
+            {showHeading && (
+                <SectionHeading title={config.title} description={config.description} embedded={embedded} />
+            )}
 
-            <div className={`grid ${embedded ? "gap-4" : "gap-6"}`}>
-                {config.items.map((item, index) => (
-                    <motion.div
-                        key={index}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.4, delay: 0.1 * index }}
-                        className={`bg-white dark:bg-neutral-900 ${embedded ? "p-4" : "p-6"} rounded-xl shadow-sm border border-neutral-200 dark:border-neutral-800 hover:shadow-lg transition-all duration-200 hover:scale-[1.01]`}
-                    >
-                        <div className="flex justify-between items-start mb-2">
-                            <h3 className={`${embedded ? "text-lg" : "text-xl"} font-semibold text-primary`}>{item.title}</h3>
-                            {item.date && (
-                                <span className="text-sm text-neutral-500 font-medium bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">
-                                    {item.date}
-                                </span>
-                            )}
-                        </div>
-                        {item.subtitle && (
-                            <p className={`${embedded ? "text-sm" : "text-base"} text-accent font-medium mb-3`}>{item.subtitle}</p>
-                        )}
-                        {item.content && (
-                            <div className={`${embedded ? "text-sm" : "text-base"} text-neutral-600 dark:text-neutral-500 leading-relaxed`}>
-                                <ReactMarkdown components={markdownComponents}>
-                                    {item.content}
-                                </ReactMarkdown>
-                            </div>
-                        )}
-                        {item.tags && (
-                            <div className="flex flex-wrap gap-2 mt-4">
-                                {item.tags.map(tag => (
-                                    <span key={tag} className="text-xs text-neutral-500 bg-neutral-50 dark:bg-neutral-800/50 px-2 py-1 rounded border border-neutral-100 dark:border-neutral-800">
-                                        {tag}
-                                    </span>
-                                ))}
-                            </div>
-                        )}
-                    </motion.div>
-                ))}
-            </div>
+            {variant === 'research' && (
+                <div className="research-list">
+                    {config.items.map((item, index) => <ResearchCard key={`${item.title}-${index}`} item={item} />)}
+                </div>
+            )}
+
+            {variant === 'timeline' && (
+                <div className="timeline-list">
+                    {config.items.map((item, index) => (
+                        <TimelineItem
+                            key={`${item.title}-${item.date}-${index}`}
+                            item={item}
+                            datePosition={config.date_position}
+                        />
+                    ))}
+                </div>
+            )}
+
+            {variant === 'awards' && (
+                <AwardsList items={config.items} />
+            )}
+
+            {(variant === 'compact' || variant === 'clusters') && (
+                <div className={variant === 'clusters' ? 'cluster-grid' : 'compact-grid'}>
+                    {config.items.map((item, index) => <CompactItem key={`${item.title}-${item.date || ''}-${index}`} item={item} variant={variant} />)}
+                </div>
+            )}
         </motion.div>
     );
 }

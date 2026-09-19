@@ -1,0 +1,27 @@
+type = "card"
+variant = "timeline"
+date_position = "header"
+title = "Research Experience"
+description = "Current and recent research appointments in XR, embodied interaction, and human-AI collaboration."
+
+[[items]]
+eyebrow = "Current appointment"
+title = "FIT-AWE Lab, HKUST(GZ)"
+subtitle = "Safe Passage: Diegetic Safety Events for Public VR Exergames"
+role = "Research Assistant"
+advisor = "Advisor: Prof. Haining Liang"
+date = "July 2026-Present"
+status = "In preparation for IEEE VR 2027"
+content = "Designing and developing a Unity-based VR safety mechanism and experimental framework for public exergames, with behavioral safety, gameplay continuity, and subjective experience measures."
+tags = ["Extended Reality", "Embodied Interaction", "VR Safety"]
+
+[[items]]
+eyebrow = "Recent appointment"
+title = "Studio for Narrative Spaces, City University of Hong Kong"
+subtitle = "Multi-GenAI creative workflows with 28 designers"
+role = "Research Assistant"
+advisor = "Advisor: Prof. Ray LC"
+date = "Apr. 2026-July 2026"
+status = "Prepared for submission to ACM CHI 2027"
+content = "Contributed to literature review, qualitative data collection and analysis, manuscript development, and publication-ready visualizations for a study of how designers coordinate multiple GenAI tools."
+tags = ["Human-AI Collaboration", "Generative AI", "Qualitative Research"]

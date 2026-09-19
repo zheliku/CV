@@ -8,6 +8,11 @@ import { getConfig } from '@/lib/config';
 import { getRuntimeI18nConfig } from '@/lib/i18n/config';
 import type { SiteConfig } from '@/lib/config';
 
+// GitHub Pages 项目站点前缀（与 next.config.ts 同源，由 CI 注入）。
+// 用于手动给 metadata / 图标等绝对路径补上 basePath 前缀（这些不会被 Next 自动前缀）。
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+const withBasePath = (path: string) => (path.startsWith('/') ? `${basePath}${path}` : path);
+
 export async function generateMetadata(): Promise<Metadata> {
   const config = getConfig();
   const runtimeI18n = getRuntimeI18nConfig(config.i18n);
@@ -24,7 +29,7 @@ export async function generateMetadata(): Promise<Metadata> {
     creator: config.author.name,
     publisher: config.author.name,
     icons: {
-      icon: config.site.favicon,
+      icon: withBasePath(config.site.favicon),
     },
     openGraph: {
       type: 'website',
@@ -131,16 +136,7 @@ export default function RootLayout({
   return (
     <html lang={runtimeI18n.defaultLocale} className="scroll-smooth" suppressHydrationWarning>
       <head>
-        <link rel="icon" href={config.site.favicon} type="image/svg+xml" />
-        <link rel="dns-prefetch" href="https://jialeliu.com" />
-        <link rel="preconnect" href="https://jialeliu.com" crossOrigin="" />
-        <link
-          rel="preload"
-          as="font"
-          type="font/woff2"
-          href="https://jialeliu.com/fonts/georgiab.woff2"
-          crossOrigin=""
-        />
+        <link rel="icon" href={withBasePath(config.site.favicon)} type="image/svg+xml" />
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -167,7 +163,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="font-sans antialiased">
+      <body className="font-sans antialiased" suppressHydrationWarning>
         <ThemeProvider>
           <LocaleProvider config={runtimeI18n}>
             <Navigation
@@ -178,7 +174,7 @@ export default function RootLayout({
               itemsByLocale={navigationByLocale}
               siteTitleByLocale={siteTitleByLocale}
             />
-            <main className="min-h-screen pt-16 lg:pt-20">
+            <main className="min-h-screen pt-[58px]">
               {children}
             </main>
             <Footer

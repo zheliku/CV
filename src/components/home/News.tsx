@@ -2,6 +2,8 @@
 
 import { motion } from 'framer-motion';
 import { useMessages } from '@/lib/i18n/useMessages';
+import { ExternalEntityText } from '@/components/ui/ExternalEntityLink';
+import { newsEntityKeys } from '@/lib/externalEntities';
 
 export interface NewsItem {
     date: string;
@@ -15,23 +17,27 @@ interface NewsProps {
 
 export default function News({ items, title }: NewsProps) {
     const messages = useMessages();
-    const resolvedTitle = title || messages.home.news;
 
     return (
         <motion.section
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
+            initial={{ opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.45 }}
+            className="news-section"
         >
-            <h2 className="text-2xl font-serif font-bold text-primary mb-4">{resolvedTitle}</h2>
-            <div className="space-y-3">
-                {items.map((item, index) => (
-                    <div key={index} className="flex items-start space-x-3">
-                        <span className="text-xs text-neutral-500 mt-1 w-16 flex-shrink-0">{item.date}</span>
-                        <p className="text-sm text-neutral-700">{item.content}</p>
-                    </div>
-                ))}
+            <div className="news-heading">
+                <p className="eyebrow">{messages.home.news === '动态' ? '动态' : 'Updates'}</p>
+                <h2>{title || messages.home.news}</h2>
             </div>
+            <ol className="news-list">
+                {items.map((item, index) => (
+                    <li key={`${item.date}-${index}`}>
+                        <time>{item.date}</time>
+                        <p><ExternalEntityText entities={newsEntityKeys}>{item.content}</ExternalEntityText></p>
+                    </li>
+                ))}
+            </ol>
         </motion.section>
     );
 }

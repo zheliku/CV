@@ -1,0 +1,24 @@
+type = "card"
+variant = "clusters"
+title = "技能与方法"
+description = "覆盖系统构建、实证研究与交互设计的研究实践。"
+
+[[items]]
+title = "技术技能"
+tags = [
+    "Python/Unity/C#/C++",
+    "软件/游戏开发",
+    "VR/AR/MR 系统",
+    "Meta Quest 3/Pico4/HTC VIVE",
+    "AI编程",
+    "手势/传感交互",
+    "信息/数据可视化",
+]
+
+[[items]]
+title = "研究技能"
+tags = ["用户研究", "实验与问卷设计", "半结构化访谈", "可用性评估", "混合方法分析", "行为数据分析", "系统评估"]
+
+[[items]]
+title = "个人兴趣"
+tags = ["AI发展前沿", "编程", "羽毛球", "阅读", "音乐"]

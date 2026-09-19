@@ -1,5 +1,5 @@
-I am a PhD student at the School of Science, University of Example, advised by [Prof. Advisor One](https://example.com) and [Dr. Advisor Two](https://example.com).
+I am a Ph.D. candidate (combined master's–Ph.D. track) at the School of Artificial Intelligence, Beijing Normal University, advised by [Prof. Yanlin Luo](https://ai.bnu.edu.cn/xygk/szdw/zgj/9d846b48ef234de0b4821c1710a2c467.htm) and [Assoc. Prof. Hongwen Zhang](https://zhanghongwen.cn/).
 
-Prior to this, I obtained a BSc degree with First Class Honours in Natural Science from the University of Example.
+I'm broadly interested in **multimodal interaction, embodied intelligence, and immersive learning**. Rather than simply placing knowledge inside a virtual environment, I care about whether technology can get learners to genuinely *participate*—seeing and understanding through avatars and visual interaction, feeling through physical-object tracking and haptic feedback, and responding naturally as large models let the system read the situation and act on it.
 
-My current research focuses on investigating the mathematical principles of natural philosophy.
+I hope to keep pushing along this line—gradually fusing vision, haptics, and intelligent interaction—toward an **intelligent teacher** that can converse, demonstrate, and collaborate with learners naturally, and to study how this more embodied, more interactive way of learning will change the way people understand knowledge.

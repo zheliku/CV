@@ -1,7 +1,15 @@
 [[news]]
-date = "2025-11"
-content = "Our work has been accepted by a prestigious journal 🎉"
+date = "2026-01"
+content = "Our work MomentumTouch has been accepted to CHI 2026, a top conference on human-computer interaction! 🎉"
+
+[[news]]
+date = "2026-01"
+content = "Our work PhysicsHap has been accepted to IEEE VR 2026, a top conference on graphics and virtual reality, and recommended to IEEE TVCG, a top journal in visualization and graphics! 🎉"
 
 [[news]]
 date = "2025-09"
-content = "Starting my PhD at the University of Example"
+content = "Started my Ph.D. (combined master's–Ph.D. track) at the School of Artificial Intelligence, Beijing Normal University."
+
+[[news]]
+date = "2023-09"
+content = "Started my master's degree at the School of Artificial Intelligence, Beijing Normal University."

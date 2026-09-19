@@ -2,14 +2,13 @@
 
 import Profile from '@/components/home/Profile';
 import About from '@/components/home/About';
-import SelectedPublications from '@/components/home/SelectedPublications';
 import News, { NewsItem } from '@/components/home/News';
 import PublicationsList from '@/components/publications/PublicationsList';
 import TextPage from '@/components/pages/TextPage';
 import CardPage from '@/components/pages/CardPage';
 import type { SiteConfig } from '@/lib/config';
-import { Publication } from '@/types/publication';
-import { CardPageConfig, PublicationPageConfig, TextPageConfig } from '@/types/page';
+import type { Publication } from '@/types/publication';
+import type { CardPageConfig, PublicationPageConfig, TextPageConfig } from '@/types/page';
 import { useLocaleStore } from '@/lib/stores/localeStore';
 
 interface SectionConfig {
@@ -28,7 +27,7 @@ type PageData =
   | { type: 'about'; id: string; sections: SectionConfig[] }
   | { type: 'publication'; id: string; config: PublicationPageConfig; publications: Publication[] }
   | { type: 'text'; id: string; config: TextPageConfig; content: string }
-  | { type: 'card'; id: string; config: CardPageConfig };
+  | { type: 'card'; id: string; config: CardPageConfig; continuationConfig?: CardPageConfig };
 
 export interface HomePageLocaleData {
   author: SiteConfig['author'];
@@ -49,79 +48,50 @@ export default function HomePageClient({ dataByLocale, defaultLocale }: HomePage
   const fallback = dataByLocale[defaultLocale] || Object.values(dataByLocale)[0];
   const data = dataByLocale[locale] || fallback;
 
-  if (!data) {
-    return null;
-  }
+  if (!data) return null;
+
+  const aboutPage = data.pagesToShow.find((page): page is Extract<PageData, { type: 'about' }> => page.type === 'about');
+  const biography = aboutPage?.sections.find((section) => section.type === 'markdown');
+  const news = aboutPage?.sections.find((section) => section.type === 'list');
+  const contentPages = data.pagesToShow.filter((page) => page.type !== 'about');
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 bg-background min-h-screen">
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-        <div className="lg:col-span-1">
+    <div className="homepage-shell">
+      <section id="about" className="hero-section scroll-mt-24">
+        <div className="hero-grid">
           <Profile
             author={data.author}
             social={data.social}
             features={data.features}
-            researchInterests={data.researchInterests}
           />
+          {biography && (
+            <About
+              content={biography.content || ''}
+              title={biography.title}
+              researchInterests={data.researchInterests}
+            />
+          )}
         </div>
+        {news && <News items={news.items || []} title={news.title} />}
+      </section>
 
-        <div className="lg:col-span-2 space-y-8">
-          {data.pagesToShow.map((page) => (
-            <section key={page.id} id={page.id} className="scroll-mt-24 space-y-8">
-              {page.type === 'about' && page.sections.map((section: SectionConfig) => {
-                switch (section.type) {
-                  case 'markdown':
-                    return (
-                      <About
-                        key={section.id}
-                        content={section.content || ''}
-                        title={section.title}
-                      />
-                    );
-                  case 'publications':
-                    return (
-                      <SelectedPublications
-                        key={section.id}
-                        publications={section.publications || []}
-                        title={section.title}
-                        enableOnePageMode={data.enableOnePageMode}
-                      />
-                    );
-                  case 'list':
-                    return (
-                      <News
-                        key={section.id}
-                        items={section.items || []}
-                        title={section.title}
-                      />
-                    );
-                  default:
-                    return null;
-                }
-              })}
-              {page.type === 'publication' && (
-                <PublicationsList
-                  config={page.config}
-                  publications={page.publications}
-                  embedded={true}
-                />
-              )}
-              {page.type === 'text' && (
-                <TextPage
-                  config={page.config}
-                  content={page.content}
-                  embedded={true}
-                />
-              )}
-              {page.type === 'card' && (
-                <CardPage
-                  config={page.config}
-                  embedded={true}
-                />
-              )}
-            </section>
-          ))}
-        </div>
+      <div className="site-sections">
+        {contentPages.map((page) => (
+          <section key={page.id} id={page.id} className="site-section scroll-mt-24">
+            {page.type === 'publication' && (
+              <PublicationsList config={page.config} publications={page.publications} embedded />
+            )}
+            {page.type === 'text' && <TextPage config={page.config} content={page.content} embedded />}
+            {page.type === 'card' && (page.continuationConfig ? (
+              <div className="research-section-content">
+                <CardPage config={page.config} embedded />
+                <CardPage config={page.continuationConfig} embedded />
+              </div>
+            ) : (
+              <CardPage config={page.config} embedded />
+            ))}
+          </section>
+        ))}
       </div>
     </div>
   );

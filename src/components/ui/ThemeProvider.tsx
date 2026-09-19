@@ -1,7 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useThemeStore, resolveTheme } from '@/lib/stores/themeStore';
+import { useIsMounted } from '@/lib/useIsMounted';
 
 type MediaQueryListWithDeprecated = MediaQueryList & {
   addListener?: (listener: (this: MediaQueryList, ev: MediaQueryListEvent) => void) => void;
@@ -10,11 +11,7 @@ type MediaQueryListWithDeprecated = MediaQueryList & {
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const { theme } = useThemeStore();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useIsMounted();
 
   useEffect(() => {
     if (!mounted) return;

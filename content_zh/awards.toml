@@ -1,27 +1,81 @@
 type = "card"
+variant = "awards"
 title = "奖项"
 description = "我获得的荣誉与奖项。"
 
 [[items]]
-title = "示例奖项"
-subtitle = "颁发机构"
-date = "2025"
-content = "奖项说明。"
+date = "2025/09"
+title = "北京师范大学硕博连读 · 专业成绩第一"
+# subtitle = "北京师范大学"
+featured = true
 
 [[items]]
-title = "示例奖项"
-subtitle = "颁发机构"
-date = "2024"
-content = "奖项说明。"
+date = "2025/04"
+title = "北京师范大学校运会羽毛球团体赛 · 团体第六"
+# subtitle = "北京师范大学"
+content = "参与项目：男单"
+featured = false
 
 [[items]]
-title = "示例奖项"
-subtitle = "颁发机构"
-date = "2023"
-content = "奖项说明。"
+date = "2024/12"
+title = "北京师范大学京师学术奖学金（硕士） · 一等奖"
+# subtitle = "北京师范大学"
+featured = true
 
 [[items]]
-title = "示例奖项"
-subtitle = "颁发机构"
-date = "2022"
-content = "奖项说明。"
+date = "2023/09"
+title = "北京师范大学研究生保送 · 专业成绩第五"
+# subtitle = "北京师范大学"
+featured = true
+
+[[items]]
+date = "2022/08"
+title = "第八届中国国际“互联网+”大学生创新创业大赛北京赛区复赛高教主赛道 · 二等奖"
+subtitle = "北京市教育委员会"
+content = "项目名称：流萤工作室——实体/VR/AR红色桌游设计开发项目"
+featured = true
+
+[[items]]
+date = "2022/06"
+title = "青创北京2022年“挑战杯”首都大学生创业计划竞赛“青绘团史”专项赛 · 北京市银奖"
+subtitle = "共青团北京市委员会"
+content = "项目名称：百年青团——团史主题游戏开发项目"
+featured = true
+
+[[items]]
+date = "2022/06"
+title = " 北京市级大学生创新创业训练项目 · 市级优秀"
+# subtitle = "北京师范大学"
+content = "项目名称：K12生物课程中“人体循环系统”的沉浸式学习环境"
+featured = true
+
+[[items]]
+date = "2022/03"
+title = "北京师范大学程序设计竞赛 · 二等奖"
+# subtitle = "北京师范大学"
+featured = true
+
+[[items]]
+date = "2021/12"
+title = "北京师范大学京师奖学金（本科） · 一等奖"
+# subtitle = "北京师范大学"
+featured = true
+
+[[items]]
+date = "2021/05"
+title = "2021中国高校计算机团体程序设计天梯赛 · 团体三等奖"
+subtitle = "全国高等学校计算机教育研究会"
+content = "证书编号：CCCC2021GPLT01389"
+featured = false
+
+[[items]]
+date = "2021/02"
+title = "美国大学生数学建模竞赛 · H奖"
+subtitle = "美国数学及其应用联合会"
+featured = false
+
+[[items]]
+date = "2020/12"
+title = "北京师范大学京师奖学金（本科） · 二等奖"
+# subtitle = "北京师范大学"
+featured = false

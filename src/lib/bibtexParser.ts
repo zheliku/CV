@@ -3,9 +3,6 @@ import { getConfig } from './config';
 import { getRuntimeI18nConfig } from './i18n/config';
 import { parseBibTeXInline } from './bibtexInline';
 
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const bibtexParse = require('bibtex-parse-js');
-
 // Map BibTeX entry types to our publication types
 const typeMapping: Record<string, PublicationType> = {
   article: 'journal',
@@ -36,9 +33,149 @@ const monthMapping: Record<string, number> = {
   dec: 12, december: 12,
 };
 
+interface BibTeXEntry {
+  entryType: string;
+  citationKey: string;
+  entryTags: Record<string, string>;
+}
+
+// Non-publication BibTeX directives we should skip over.
+const IGNORED_ENTRY_TYPES = new Set(['comment', 'preamble', 'string']);
+
+function skipWhitespace(value: string, index: number): number {
+  while (index < value.length && /\s/.test(value[index])) {
+    index += 1;
+  }
+  return index;
+}
+
+// Read a single field value starting right after the `=` sign.
+// Supports braced {...}, quoted "..." and bare tokens (e.g. `month = mar`).
+function readFieldValue(value: string, start: number): { text: string; index: number } {
+  const char = value[start];
+
+  if (char === '{' || char === '"') {
+    const isBrace = char === '{';
+    const closing = isBrace ? '}' : '"';
+    let depth = 0;
+    let index = start;
+
+    for (; index < value.length; index += 1) {
+      const current = value[index];
+      if (isBrace && current === '{') depth += 1;
+      else if (current === '}' && isBrace) {
+        depth -= 1;
+        if (depth === 0) break;
+      } else if (!isBrace && current === closing) {
+        break;
+      }
+    }
+
+    return { text: value.slice(start + 1, index), index: index + 1 };
+  }
+
+  let index = start;
+  while (index < value.length && value[index] !== ',' && value[index] !== '}') {
+    index += 1;
+  }
+  return { text: value.slice(start, index).trim(), index };
+}
+
+// Parse the `field = value` pairs of a single entry, stopping at its closing `}`.
+function readEntryFields(value: string, start: number): { tags: Record<string, string>; index: number } {
+  const tags: Record<string, string> = {};
+  let index = start;
+
+  while (index < value.length) {
+    index = skipWhitespace(value, index);
+
+    let name = '';
+    while (index < value.length && /[A-Za-z0-9_-]/.test(value[index])) {
+      name += value[index];
+      index += 1;
+    }
+
+    index = skipWhitespace(value, index);
+
+    if (value[index] !== '=') {
+      if (value[index] === '}') return { tags, index: index + 1 };
+      index += 1;
+      continue;
+    }
+
+    index = skipWhitespace(value, index + 1);
+    const field = readFieldValue(value, index);
+    index = skipWhitespace(value, field.index);
+
+    if (name) {
+      tags[name.toLowerCase()] = field.text;
+    }
+
+    if (value[index] === '}') return { tags, index: index + 1 };
+    if (value[index] === ',') index += 1;
+  }
+
+  return { tags, index };
+}
+
+// Minimal, dependency-free BibTeX parser producing the same shape as the
+// previous third-party parser: `{ entryType, citationKey, entryTags }[]`.
+function parseBibTeXEntries(content: string): BibTeXEntry[] {
+  const entries: BibTeXEntry[] = [];
+  let index = 0;
+
+  while (index < content.length) {
+    const at = content.indexOf('@', index);
+    if (at === -1) break;
+
+    let cursor = skipWhitespace(content, at + 1);
+
+    let entryType = '';
+    while (cursor < content.length && /[A-Za-z]/.test(content[cursor])) {
+      entryType += content[cursor];
+      cursor += 1;
+    }
+
+    if (!entryType) {
+      index = at + 1;
+      continue;
+    }
+
+    cursor = skipWhitespace(content, cursor);
+
+    if (content[cursor] !== '{') {
+      index = at + 1;
+      continue;
+    }
+    cursor += 1;
+
+    // The citation key is the leading bare token before the first `,` or `}`.
+    const keyStart = cursor;
+    while (cursor < content.length && content[cursor] !== ',' && content[cursor] !== '}') {
+      cursor += 1;
+    }
+    const citationKey = content.slice(keyStart, cursor).trim();
+
+    if (content[cursor] === ',') cursor += 1;
+
+    const body = readEntryFields(content, cursor);
+
+    if (IGNORED_ENTRY_TYPES.has(entryType.toLowerCase())) {
+      index = body.index;
+      continue;
+    }
+
+    entries.push({ entryType, citationKey, entryTags: body.tags });
+
+    index = body.index;
+  }
+
+  return entries;
+}
+
 export function parseBibTeX(bibtexContent: string, locale?: string): Publication[] {
   const highlightNames = getHighlightNames(locale);
-  const entries = bibtexParse.toJSON(bibtexContent);
+  const entries = parseBibTeXEntries(bibtexContent);
 
   return entries.map((entry: { entryType: string; citationKey: string; entryTags: Record<string, string> }, index: number) => {
     const tags = entry.entryTags;
@@ -91,9 +228,10 @@ export function parseBibTeX(bibtexContent: string, locale?: string): Publication
       description: cleanBibTeXString(tags.description || tags.note),
       selected,
       preview,
+      category: cleanBibTeXString(tags.category || tags.badge),
 
       // Store original BibTeX (excluding custom fields)
-      bibtex: reconstructBibTeX(entry, ['selected', 'preview', 'description', 'keywords', 'code']),
+      bibtex: reconstructBibTeX(entry, ['selected', 'preview', 'description', 'keywords', 'code', 'category', 'badge']),
     };
 
     // Clean up undefined fields

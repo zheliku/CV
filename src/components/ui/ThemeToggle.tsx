@@ -1,12 +1,13 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import type { ReactNode } from 'react';
 import { motion } from 'framer-motion';
 import { SunIcon, MoonIcon, ComputerDesktopIcon } from '@heroicons/react/24/outline';
 import { useThemeStore, type Theme } from '@/lib/stores/themeStore';
 import { useMessages } from '@/lib/i18n/useMessages';
 import { cn } from '@/lib/utils';
+import { useIsMounted } from '@/lib/useIsMounted';
 
 interface ThemeOption {
   value: Theme;
@@ -38,13 +39,9 @@ function useThemeOptions(): ThemeOption[] {
 
 export function ThemeToggle() {
   const { theme, setTheme } = useThemeStore();
-  const [mounted, setMounted] = useState(false);
+  const mounted = useIsMounted();
   const messages = useMessages();
   const themes = useThemeOptions();
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   if (!mounted) {
     return (
@@ -99,14 +96,10 @@ export function ThemeToggle() {
 
 export function ThemeToggleDropdown() {
   const { theme, setTheme } = useThemeStore();
-  const [mounted, setMounted] = useState(false);
+  const mounted = useIsMounted();
   const [isOpen, setIsOpen] = useState(false);
   const messages = useMessages();
   const themes = useThemeOptions();
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   if (!mounted) {
     return (

@@ -1,0 +1,109 @@
+type = "card"
+variant = "research"
+title = "Research Projects"
+description = "Haptic interaction and embodied learning in immersive VR/MR."
+
+[[items]]
+eyebrow = "Current research · Passthrough MR"
+title = "EgoAnchor: Zero-Shot Dynamic Anchoring of Everyday Objects in Passthrough Mixed Reality"
+affiliation = "School of Artificial Intelligence, Beijing Normal University"
+role = "First Author"
+advisor = "Advisors: Prof. Yanlin Luo / Assoc. Prof. Hongwen Zhang"
+date = "2025.09 – 2026.08"
+status = "In submission to IEEE VR 2027"
+content = "EgoAnchor turns the asynchronous, low-rate and unstable observations of zero-shot 6-DoF pose estimation into continuous, stable and recoverable object anchors in passthrough MR: its perception backend chains open-vocabulary detection, temporal segmentation, stereo depth and pose estimation scored by a visibility–color–depth (VCD) measure, while the runtime aligns by capture time and uses a Kalman filter and interpolation to synthesize render-synchronous anchors, with StaticLock suppressing idle jitter and reacquiring after occlusion. Built on Meta Quest 3 and Unity, controlled benchmarks, ablations and a 24-participant study show better static registration, occlusion recovery and trajectory residuals than the baselines."
+metrics = [
+    "Head-motion coupling error",
+    "Occlusion-recovery error",
+    "N=24 within-subject study",
+    "NSFC Grant No. 62377004",
+]
+tags = [
+    "Passthrough Mixed Reality",
+    "Zero-Shot 6-DoF Pose",
+    "Dynamic Object Anchoring",
+]
+methods = [
+    "Meta Quest 3",
+    "Unity",
+    "C#",
+    "FoundationPose",
+    "YOLOE",
+    "Cutie",
+    "Fast-FoundationStereo",
+    "Kalman Filter",
+    "ZeroMQ / NATS",
+]
+teaser = "EGO-01"
+teaser_label = "Zero-shot dynamic anchoring of everyday objects in passthrough MR"
+images = ["/research/26egoanchor-01.png", "/research/26egoanchor-02.webp"]
+
+[[items]]
+eyebrow = "Embodied learning · Consistent haptics"
+title = "MomentumTouch: How Consistent Haptic Feedback Empowers VR Embodied Learning through Cognitive Resource Reconstruction"
+title_link = "https://doi.org/10.1145/3772318.3791751"
+affiliation = "School of Artificial Intelligence, Beijing Normal University"
+role = "First Author"
+advisor = "Advisors: Prof. Yanlin Luo / Assoc. Prof. Hongwen Zhang"
+date = "2024.03 – 2025.09"
+status = "ACM CHI 2026"
+content = "MomentumTouch targets the high-school physics unit on conservation of momentum, using a low-cost 3D-printed apparatus (a spring-loaded slider, a knob and a button) with the Meta Quest 3 to deliver consistent haptic feedback that satisfies both physical similarity and dynamic colocation. In a real classroom we ran a between-subjects mixed-methods study with 64 senior-year students (pre/post knowledge tests, cognitive load, ARCS motivation, immersion, 64-channel EEG and interviews). The results reveal a Cognitive Resource Reconstruction effect: consistent haptics significantly lowered extraneous load and raised germane load, and improved motivation and immersion, while short-term knowledge gain stayed non-significant—together indicating stronger conceptual grounding and readiness for transfer."
+metrics = [
+    "N=64 field study in a real classroom",
+    "64-channel EEG triangulation",
+    "ECL ↓ · GCL ↑",
+    "NSFC Grant No. 62377004",
+]
+tags = ["Embodied Learning", "Consistent Haptic Feedback", "VR STEM Education"]
+methods = [
+    "Unity",
+    "Meta Quest 3",
+    "3D-Printed Haptic Apparatus",
+    "Arduino",
+    "EEG",
+    "Mixed-Methods Study",
+]
+actions = [
+    { label = "Paper", href = "https://doi.org/10.1145/3772318.3791751", type = "paper" },
+    { label = "Code", href = "https://github.com/zheliku/MomentumTouch", type = "code" },
+]
+teaser = "MOM-02"
+teaser_label = "Consistent haptics and cognitive resource reconstruction"
+images = [
+    "/research/26momentumtouch-01.webp",
+    "/research/26momentumtouch-02.webp",
+    "/research/26momentumtouch-03.webp",
+]
+
+[[items]]
+eyebrow = "Haptic framework · Modular proxies"
+title = "PhysicsHap: A Modular Haptic Interaction Framework for Enhancing Student Learning in Immersive Virtual Physics Experiments"
+title_link = "https://doi.org/10.1109/TVCG.2026.3679917"
+affiliation = "School of Artificial Intelligence, Beijing Normal University"
+role = "Second Author"
+advisor = "Advisors: Prof. Yanlin Luo / Assoc. Prof. Hongwen Zhang"
+date = "2024.03 – 2026.09"
+status = "IEEE TVCG 2026"
+content = "PhysicsHap is a modular framework for rapidly building reconfigurable haptic proxies for virtual physics experiments: from a systematic analysis of 45 secondary-school physics experiments it decouples haptics into cutaneous (shape/texture) and kinesthetic (force/damping) channels, combining passive Tangible Bodies with active Force Engines (a brushless motor and magnetic encoder for linear, rotational and vibrotactile feedback), and uses Quest 3 hand tracking for tracker-free physical–virtual synchronization. A 64-participant randomized controlled experiment shows that, versus gesture interaction, it significantly improves experimental knowledge and comprehensive ability, optimizes cognitive load (ECL↓, GCL↑) and increases learning motivation."
+metrics = [
+    "Analysis of 45 secondary-school physics experiments",
+    "N=64 randomized controlled experiment",
+    "Comprehensive ability & motivation analysis",
+    "NSFC Grant No. 62377004",
+]
+tags = ["Modular Haptic Proxy", "Immersive Virtual Physics", "Force Feedback"]
+methods = [
+    "Unity",
+    "Meta Quest 3 Hand Tracking",
+    "BLDC Motor + SimpleFOC",
+    "AS5600 Encoder",
+    "3D Printing",
+    "Arduino",
+]
+actions = [
+    { label = "Paper", href = "https://doi.org/10.1109/TVCG.2026.3679917", type = "paper" },
+    { label = "Code", href = "https://github.com/lyh-12/PhysicsHap", type = "code" },
+]
+teaser = "PHY-03"
+teaser_label = "A modular haptic framework for virtual physics experiments"
+images = ["/research/26physicshap-01.png", "/research/26physicshap-02.png"]

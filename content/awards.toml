@@ -1,27 +1,73 @@
 type = "card"
+variant = "awards"
 title = "Awards"
 description = "Honors and awards I have received."
 
 [[items]]
-title = "Example Award"
-subtitle = "Organization"
-date = "2025"
-content = "Description of the award."
+date = "2025/09"
+title = "Beijing Normal University Combined Master's–Ph.D. · 1st in Major GPA"
+featured = true
 
 [[items]]
-title = "Example Award"
-subtitle = "Organization"
-date = "2024"
-content = "Description of the award."
+date = "2025/04"
+title = "BNU Games – Badminton Team Event · 6th (Team)"
+content = "Event: Men's Singles"
+featured = false
 
 [[items]]
-title = "Example Award"
-subtitle = "Organization"
-date = "2023"
-content = "Description of the award."
+date = "2024/12"
+title = "BNU Jingshi Academic Scholarship (M.Sc.) · First Prize"
+featured = true
 
 [[items]]
-title = "Example Award"
-subtitle = "Organization"
-date = "2022"
-content = "Description of the award."
+date = "2023/09"
+title = "BNU Graduate Admission by Recommendation · 5th in Major GPA"
+featured = true
+
+[[items]]
+date = "2022/08"
+title = "8th China International 'Internet+' College Students' Innovation & Entrepreneurship Competition, Beijing Semifinal, Main Track · Second Prize"
+subtitle = "Beijing Municipal Education Commission"
+content = "Project: Firefly Studio — Physical / VR / AR Red-Culture Board Game"
+featured = true
+
+[[items]]
+date = "2022/06"
+title = "Youth Beijing 2022 'Challenge Cup' College Entrepreneurship Plan Competition, League-History Special Track · Beijing Silver Award"
+subtitle = "Communist Youth League Beijing Municipal Committee"
+content = "Project: A Century of the Youth League — League-History-Themed Game"
+featured = true
+
+[[items]]
+date = "2022/06"
+title = "Beijing Municipal College Students' Innovation & Entrepreneurship Training Program · Municipal Excellent"
+content = "Project: An Immersive Learning Environment for the Human Circulatory System in K-12 Biology"
+featured = true
+
+[[items]]
+date = "2022/03"
+title = "BNU Programming Contest · Second Prize"
+featured = true
+
+[[items]]
+date = "2021/12"
+title = "BNU Jingshi Scholarship (B.Sc.) · First Prize"
+featured = true
+
+[[items]]
+date = "2021/05"
+title = "2021 China GPLT Collegiate Programming Ladder Tournament · Team Third Prize"
+subtitle = "National Association of Computer Education in Higher Education"
+content = "Certificate No.: CCCC2021GPLT01389"
+featured = false
+
+[[items]]
+date = "2021/02"
+title = "Interdisciplinary Contest in Modeling (ICM) · Honorable Mention"
+subtitle = "Consortium for Mathematics and Its Applications (COMAP)"
+featured = false
+
+[[items]]
+date = "2020/12"
+title = "BNU Jingshi Scholarship (B.Sc.) · Second Prize"
+featured = false

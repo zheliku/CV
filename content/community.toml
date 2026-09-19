@@ -1,0 +1,54 @@
+type = "card"
+variant = "timeline"
+date_position = "header"
+title = "Community, Leadership & Service"
+description = "Community engagement, student leadership, cultural practice, and academic service."
+
+[[items]]
+title = "Red Cross Society, Beijing Normal University"
+subtitle = "Head of the New Media Center"
+location = "Changsha, China"
+date = "May 2023 – Sep. 2025"
+content = "Led content strategy and operations for campus new-media platforms such as “Study at CSU”, covering topic planning, writing, visual communication, and audience engagement; produced 50+ multimedia posts, with individual articles reaching 100K+ views and 12K+ reposts, while recruiting and mentoring 20+ members."
+
+# [[items]]
+# title = "Living Water Project Teaching Volunteer Program"
+# subtitle = "Volunteer Teacher & Head of the Publicity Team"
+# location = "Jianghua Yao Autonomous County, China"
+# date = "Jul. 2024"
+# content = "Designed gamified learning activities and adapted teaching formats through classroom observation and student feedback."
+
+# [[items]]
+# title = "Intangible Cultural Heritage Preservation and Rural Revitalization"
+# subtitle = "Core Member, Xiangyu Xiangxin Team"
+# location = "Shisunpu Village, China"
+# date = "Jun. 2024"
+# content = "Conducted cultural heritage field research and translated insights into participatory and visual design."
+
+# [[items]]
+# title = "Promoting Mandarin for Rural Revitalization"
+# subtitle = "Core Member, Wenxiaolu Team & Head of the Publicity Team"
+# location = "Heishipu Community, China"
+# date = "Sep. 2024"
+# content = "Conducted community language activities and field data collection, synthesizing participant needs into program and outreach recommendations."
+
+# [[items]]
+# title = "Class Academic & Innovation Committee"
+# subtitle = "Academic Affairs & Innovation and Entrepreneurship Representative"
+# location = "Central South University | Changsha, China"
+# date = "Sep. 2023 – Sep. 2024"
+# content = "Supported academic communication and innovation initiatives, connecting students with learning resources, competitions, and entrepreneurship opportunities."
+
+# [[items]]
+# title = "Youth Volunteer Association Activities"
+# subtitle = "Community Volunteer"
+# location = "Changsha, China"
+# date = "Nov. 2023"
+# content = "Participated in the Community Senior E-Class and Xiangya Hospital Charity Concert, supporting programs for older adults and other public-interest activities."
+
+# [[items]]
+# title = "Central South University Academic Development Open Day"
+# subtitle = "Guide & Presenter"
+# location = "Changsha, China"
+# date = "Sep. 2023"
+# content = "Supported the university’s Academic Development Open Day by introducing academic resources and activities to visitors and facilitating on-site communication."

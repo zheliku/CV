@@ -2,24 +2,13 @@ type = "about"
 title = "关于我"
 
 [profile]
-research_interests = [
-  "计算物理",
-  "数学原理",
-  "定理证明"
-]
+research_interests = ["虚拟现实", "混合现实", "具身交互", "人机交互", "沉浸式教学", "学科教育"]
 
 [[sections]]
 id = "about"
 type = "markdown"
 source = "bio.md"
 title = "关于我"
-
-[[sections]]
-id = "featured_publications"
-type = "publications"
-title = "精选论文"
-filter = "selected"
-limit = 5
 
 [[sections]]
 id = "news"

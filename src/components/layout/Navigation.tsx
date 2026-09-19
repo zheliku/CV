@@ -68,6 +68,10 @@ export default function Navigation({
 
   useEffect(() => {
     if (enableOnePageMode) {
+      // Reflect an incoming deep-link hash once after mount; later updates arrive
+      // via the hashchange listener and the IntersectionObserver below. Suppressed
+      // because it syncs from an external source (window.location), not state.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setActiveHash(window.location.hash);
       const handleHashChange = () => setActiveHash(window.location.hash);
       window.addEventListener('hashchange', handleHashChange);
@@ -114,14 +118,14 @@ export default function Navigation({
   }, [enableOnePageMode, effectiveItems]);
 
   const isDesktopItemActive = (item: SiteConfig['navigation'][number]) =>
-    enableOnePageMode
+    enableOnePageMode && item.type === 'page'
       ? activeHash === `#${item.target}` || (!activeHash && item.target === 'about')
       : (item.href === '/'
         ? pathname === '/'
         : pathname.startsWith(item.href));
 
   const getDesktopItemHref = (item: SiteConfig['navigation'][number]) =>
-    enableOnePageMode ? `/#${item.target}` : item.href;
+    enableOnePageMode && item.type === 'page' ? `/#${item.target}` : item.href;
 
   const activeItem = effectiveItems.find((item) => isDesktopItemActive(item)) ?? null;
   const activeHref = activeItem ? getDesktopItemHref(activeItem) : null;
@@ -159,7 +163,7 @@ export default function Navigation({
 
   return (
     <Disclosure as="nav" className="fixed top-0 left-0 right-0 z-50">
-      {({ open }) => (
+      {({ open, close }) => (
         <>
           <motion.div
             initial={{ y: -100 }}
@@ -172,8 +176,8 @@ export default function Navigation({
                 : 'bg-transparent'
             )}
           >
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="flex justify-between items-center h-16 lg:h-20">
+            <div className="max-w-[65rem] mx-auto px-5 sm:px-6">
+              <div className="flex justify-between items-center h-[58px]">
                 <motion.div
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -181,17 +185,17 @@ export default function Navigation({
                 >
                   <Link
                     href="/"
-                    className="text-xl lg:text-2xl font-serif font-semibold text-primary hover:text-accent transition-colors duration-200"
+                    className="text-base font-serif font-semibold text-primary hover:text-accent transition-colors duration-200"
                   >
                     {effectiveSiteTitle}
                   </Link>
                 </motion.div>
 
-                <div className="hidden lg:block">
-                  <div className="ml-10 flex items-center space-x-3">
+                <div className="hidden xl:block">
+                  <div className="ml-8 flex items-center space-x-2">
                     <div
                       ref={navContainerRef}
-                      className="relative flex items-baseline space-x-1"
+                      className="relative flex items-baseline"
                       onMouseLeave={() => setHoveredHref(null)}
                     >
                       {indicatorStyle && (
@@ -219,17 +223,20 @@ export default function Navigation({
                       {effectiveItems.map((item) => {
                         const isActive = isDesktopItemActive(item);
                         const href = getDesktopItemHref(item);
+                        const opensInNewTab = item.type === 'link' && href.toLowerCase().endsWith('.pdf');
 
                         return (
                           <Link
                             key={item.target}
                             href={href}
+                            target={opensInNewTab ? '_blank' : undefined}
+                            rel={opensInNewTab ? 'noopener noreferrer' : undefined}
                             data-nav-href={href}
                             prefetch={true}
-                            onClick={() => enableOnePageMode && setActiveHash(`#${item.target}`)}
+                            onClick={() => enableOnePageMode && item.type === 'page' && setActiveHash(`#${item.target}`)}
                             onMouseEnter={() => setHoveredHref(href)}
                             className={cn(
-                              'relative px-3 py-2 text-sm font-medium rounded-lg transition-colors duration-150',
+                              'relative px-2.5 py-2 text-[0.84375rem] leading-[1.2] font-medium rounded-md transition-colors duration-150',
                               isActive
                                 ? 'text-primary'
                                 : hoveredHref === href
@@ -247,7 +254,7 @@ export default function Navigation({
                   </div>
                 </div>
 
-                <div className="lg:hidden flex items-center space-x-2">
+                <div className="xl:hidden flex items-center space-x-2">
                   <LanguageToggle i18n={i18n} />
                   <ThemeToggle />
                   <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-neutral-600 hover:text-primary hover:bg-neutral-100 dark:hover:bg-neutral-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-accent transition-colors duration-200">
@@ -257,9 +264,9 @@ export default function Navigation({
                       transition={{ duration: 0.2 }}
                     >
                       {open ? (
-                        <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
+                        <XMarkIcon className="block h-5 w-5" aria-hidden="true" />
                       ) : (
-                        <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
+                        <Bars3Icon className="block h-5 w-5" aria-hidden="true" />
                       )}
                     </motion.div>
                   </Disclosure.Button>
@@ -276,19 +283,20 @@ export default function Navigation({
                   animate={{ opacity: 1, height: 'auto' }}
                   exit={{ opacity: 0, height: 0 }}
                   transition={{ duration: 0.3 }}
-                  className="lg:hidden bg-background/95 backdrop-blur-xl border-b border-neutral-200/50 shadow-lg"
+                  className="xl:hidden bg-background/95 backdrop-blur-xl border-b border-neutral-200/50 shadow-lg"
                 >
                   <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                     {effectiveItems.map((item, index) => {
-                      const isActive = enableOnePageMode
+                      const isActive = enableOnePageMode && item.type === 'page'
                         ? (item.href === '/' ? pathname === '/' && !activeHash : activeHash === `#${item.target}`)
                         : (item.href === '/'
                           ? pathname === '/'
                           : pathname.startsWith(item.href));
 
-                      const href = enableOnePageMode
+                      const href = enableOnePageMode && item.type === 'page'
                         ? (item.href === '/' ? '/' : `/#${item.target}`)
                         : item.href;
+                      const opensInNewTab = item.type === 'link' && href.toLowerCase().endsWith('.pdf');
 
                       return (
                         <motion.div
@@ -297,20 +305,37 @@ export default function Navigation({
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ delay: index * 0.1 }}
                         >
-                          <Disclosure.Button
-                            as={Link}
+                          <Link
                             href={href}
+                            target={opensInNewTab ? '_blank' : undefined}
+                            rel={opensInNewTab ? 'noopener noreferrer' : undefined}
                             prefetch={true}
-                            onClick={() => enableOnePageMode && setActiveHash(item.href === '/' ? '' : `#${item.target}`)}
+                            onClick={(event) => {
+                              if (enableOnePageMode && item.type === 'page') {
+                                setActiveHash(item.href === '/' ? '' : `#${item.target}`);
+                                if (pathname === '/') {
+                                  event.preventDefault();
+                                  const nextHash = item.target === 'about' ? '/' : `#${item.target}`;
+                                  window.history.pushState(null, '', nextHash);
+                                  window.setTimeout(() => {
+                                    document.getElementById(item.target)?.scrollIntoView({
+                                      behavior: 'smooth',
+                                      block: 'start',
+                                    });
+                                  }, 350);
+                                }
+                              }
+                              close();
+                            }}
                             className={cn(
-                              'block px-3 py-2 rounded-md text-base font-medium transition-all duration-200',
+                              'block px-3 py-2 rounded-md text-sm font-medium transition-all duration-200',
                               isActive
                                 ? 'text-primary bg-accent/10 border-l-4 border-accent'
                                 : 'text-neutral-600 hover:text-primary hover:bg-neutral-50'
                             )}
                           >
                             {item.title}
-                          </Disclosure.Button>
+                          </Link>
                         </motion.div>
                       );
                     })}

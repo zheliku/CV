@@ -27,7 +27,7 @@ type PageData =
   | { type: 'about'; id: string; sections: SectionConfig[] }
   | { type: 'publication'; id: string; config: PublicationPageConfig; publications: Publication[] }
   | { type: 'text'; id: string; config: TextPageConfig; content: string }
-  | { type: 'card'; id: string; config: CardPageConfig };
+  | { type: 'card'; id: string; config: CardPageConfig; continuationConfig?: CardPageConfig };
 
 function processSections(sections: SectionConfig[], locale?: string): SectionConfig[] {
   return sections.map((section: SectionConfig) => {
@@ -71,10 +71,13 @@ function loadPageDataForLocale(locale: string | undefined): HomePageLocaleData {
   let pagesToShow: PageData[] = [];
 
   if (enableOnePageMode) {
-    pagesToShow = localeConfig.navigation
-      .filter((item) => item.type === 'page')
-      .map((item) => {
-        const rawConfig = getPageConfig(item.target, locale);
+    const homepageSections =
+      localeConfig.homepage?.sections ||
+      localeConfig.navigation.filter((item) => item.type === 'page').map((item) => item.target);
+
+    pagesToShow = homepageSections
+      .map((sectionId) => {
+        const rawConfig = getPageConfig(sectionId, locale);
         if (!rawConfig) return null;
 
         const pageConfig = rawConfig as BasePageConfig;
@@ -82,7 +85,7 @@ function loadPageDataForLocale(locale: string | undefined): HomePageLocaleData {
         if (pageConfig.type === 'about' || 'sections' in (rawConfig as object)) {
           return {
             type: 'about',
-            id: item.target,
+            id: sectionId,
             sections: processSections((rawConfig as { sections: SectionConfig[] }).sections || [], locale),
           } as PageData;
         }
@@ -92,7 +95,7 @@ function loadPageDataForLocale(locale: string | undefined): HomePageLocaleData {
           const bibtex = getBibtexContent(pubConfig.source, locale);
           return {
             type: 'publication',
-            id: item.target,
+            id: sectionId,
             config: pubConfig,
             publications: parseBibTeX(bibtex, locale),
           } as PageData;
@@ -102,17 +105,24 @@ function loadPageDataForLocale(locale: string | undefined): HomePageLocaleData {
           const textConfig = pageConfig as TextPageConfig;
           return {
             type: 'text',
-            id: item.target,
+            id: sectionId,
             config: textConfig,
             content: getMarkdownContent(textConfig.source, locale),
           } as PageData;
         }
 
         if (pageConfig.type === 'card') {
+          // 「研究经历」(research-experience) 暂不在研究页展示；如需恢复，取消下面注释即可。
+          // const continuationConfig = sectionId === 'research'
+          //   ? getPageConfig<CardPageConfig>('research-experience', locale) || undefined
+          //   : undefined;
+          const continuationConfig: CardPageConfig | undefined = undefined;
+
           return {
             type: 'card',
-            id: item.target,
+            id: sectionId,
             config: pageConfig as CardPageConfig,
+            continuationConfig,
           } as PageData;
         }
 

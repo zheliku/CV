@@ -1,10 +1,11 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { LanguageIcon, ChevronDownIcon } from '@heroicons/react/24/outline';
 import { cn } from '@/lib/utils';
 import { useLocaleStore } from '@/lib/stores/localeStore';
+import { useIsMounted } from '@/lib/useIsMounted';
 import type { I18nRuntimeConfig } from '@/types/i18n';
 
 interface LanguageToggleProps {
@@ -13,12 +14,8 @@ interface LanguageToggleProps {
 
 export default function LanguageToggle({ i18n }: LanguageToggleProps) {
   const { locale, setLocale } = useLocaleStore();
-  const [mounted, setMounted] = useState(false);
+  const mounted = useIsMounted();
   const [isOpen, setIsOpen] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   if (!i18n.enabled || !i18n.switcher || i18n.locales.length <= 1) {
     return null;

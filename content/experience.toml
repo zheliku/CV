@@ -1,0 +1,29 @@
+type = "card"
+variant = "timeline"
+date_position = "header"
+title = "Industry Experience"
+description = "Product, experimentation, and human-AI workflow experience in technology and media organizations."
+
+[[items]]
+title = "Xiaomi Corporation"
+subtitle = "Product Management Intern · Internet Services Division"
+location = "Nanjing, China"
+date = "Jun. 2025 – Sep. 2025"
+content = "Developed and launched an AI Reading Assistant Agent across user research, competitive analysis, interaction design, requirement definition, and delivery. Also designed and monitored A/B experiments for a Pad thermal-control strategy and contributed to App Store optimization initiatives."
+tags = ["Product Management", "User Research", "A/B Testing", "SQL"]
+
+# [[items]]
+# title = "Mango TV"
+# subtitle = "AIGC Intern · Intelligent Research Center"
+# location = "Changsha, China"
+# date = "Sep. 2025 – Dec. 2025"
+# content = "Contributed to development and evaluation of Shanhai, an in-house GenAI model for historical film and television content. Designed human-AI workflows for costume, makeup, and prop generation and analyzed generation failures and user feedback with research and content teams."
+# tags = ["Generative AI", "Human-AI Workflows", "Model Evaluation"]
+
+# [[items]]
+# title = "Manulife Limited"
+# subtitle = "Business Experience Program · Project Lead"
+# location = "Hong Kong, China"
+# date = "Aug. 2024"
+# content = "Led market research, customer analysis, strategy development, and the final presentation for a user-centered financial service proposal."
+# tags = ["Project Leadership", "Market Research", "Service Design"]
