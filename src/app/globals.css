@@ -7,28 +7,29 @@
 :root,
 .light {
   /* Light theme colors */
-  --background: #fefffe;
-  --foreground: #0f172a;
+  --background: #ffffff;
+  --foreground: #0b1020;
 
-  /* Brand colors - Deep Navy & Gold */
-  --primary: #1e293b;
-  --primary-light: #334155;
-  --primary-dark: #0f172a;
-  --accent: #d4a562;
-  --accent-light: #e4b976;
-  --accent-dark: #b8914d;
+  /* Brand colors - Ink & Electric Violet (cyan as gradient partner) */
+  --primary: #10162b;
+  --primary-light: #2b3350;
+  --primary-dark: #070b16;
+  --accent: #6d5efc;
+  --accent-light: #9a8cff;
+  --accent-dark: #4a3fd0;
+  --accent-2: #1fb6d6;
 
-  /* Neutral colors */
-  --neutral-50: #f8fafc;
-  --neutral-100: #f1f5f9;
-  --neutral-200: #e2e8f0;
-  --neutral-300: #cbd5e1;
-  --neutral-400: #94a3b8;
-  --neutral-500: #64748b;
-  --neutral-600: #475569;
-  --neutral-700: #334155;
-  --neutral-800: #1e293b;
-  --neutral-900: #0f172a;
+  /* Neutral colors - cool indigo slate */
+  --neutral-50: #f7f8fc;
+  --neutral-100: #eef1f8;
+  --neutral-200: #e3e7f1;
+  --neutral-300: #ccd3e3;
+  --neutral-400: #98a3bd;
+  --neutral-500: #69748f;
+  --neutral-600: #4a5470;
+  --neutral-700: #333c54;
+  --neutral-800: #1e2540;
+  --neutral-900: #12172b;
 
   /* Semantic colors */
   --success: #10b981;
@@ -41,21 +42,29 @@
   --glass-border: rgba(255, 255, 255, 0.2);
   --glass-shadow: rgba(0, 0, 0, 0.1);
 
-  /* Shared academic layout and type scale */
+  /* Shared layout and type scale */
   --container-max: 65rem;
   --reading-max: 50rem;
   --text-meta: 0.6875rem;
   --text-small: 0.8125rem;
   --text-body: 0.96875rem;
   --text-subtitle: 1.0625rem;
-  --text-card-title: 1.125rem;
-  --text-section-title: 1.625rem;
-  --text-hero: 2.375rem;
+  --text-card-title: 1.1875rem;
+  --text-section-title: 1.9rem;
+  --text-hero: 3.25rem;
   --leading-tight: 1.2;
-  --leading-body: 1.62;
-  --space-section: 3.25rem;
-  --space-card: 1.375rem;
-  --space-list: 1.0625rem;
+  --leading-body: 1.65;
+  --space-section: 3.75rem;
+  --space-card: 1.5rem;
+  --space-list: 1.125rem;
+
+  /* Radii, depth & gradients */
+  --radius-card: 18px;
+  --radius-control: 11px;
+  --shadow-card: 0 1px 2px rgba(16, 22, 40, 0.05), 0 16px 34px -18px rgba(45, 39, 120, 0.28);
+  --shadow-card-hover: 0 2px 6px rgba(16, 22, 40, 0.07), 0 26px 50px -20px rgba(74, 63, 208, 0.4);
+  --gradient-brand: linear-gradient(120deg, var(--accent) 0%, var(--accent-2) 100%);
+  --ring-accent: 0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent);
 }
 
 @theme inline {
@@ -93,9 +102,9 @@
   --color-glass-shadow: var(--glass-shadow);
 
   /* Typography */
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-serif: Georgia, 'Times New Roman', serif;
-  --font-mono: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  --font-serif: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  --font-mono: 'SF Mono', Monaco, 'Cascadia Code', 'JetBrains Mono', 'Roboto Mono', Consolas, 'Courier New', monospace;
 
   /* Font sizes */
   --font-size-xs: 0.75rem;
@@ -144,46 +153,51 @@
   --gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
 }
 
-/* Use Source Han Serif for Chinese headings/title text via .font-serif */
+/* Chinese headings use a crisp modern sans (consistent with the redesign) */
 html:lang(zh),
 html[data-locale^="zh"] {
-  --font-serif: "Source Han Serif SC", "Source Han Serif CN", "Noto Serif CJK SC", "Noto Serif SC", "Songti SC", STSong, SimSun, serif;
+  --font-serif: 'Inter', -apple-system, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Source Han Sans SC', 'Noto Sans SC', sans-serif;
 }
 
 /* Dark mode styles */
 .dark {
-  --background: #0f172a;
-  --foreground: #f8fafc;
+  --background: #0f1526;
+  --foreground: #e9edf7;
 
   /* Adjust colors for dark mode */
-  --primary: #f8fafc;
-  --primary-light: #e2e8f0;
-  --primary-dark: #cbd5e1;
-  --accent: #e4b976;
-  --accent-light: #f0c674;
-  --accent-dark: #d4a562;
+  --primary: #f4f6ff;
+  --primary-light: #d7ddf0;
+  --primary-dark: #ffffff;
+  --accent: #8f7fff;
+  --accent-light: #b4a8ff;
+  --accent-dark: #a99bff;
+  --accent-2: #38d3ee;
 
   /* Dark mode glass effect */
-  --glass-bg: rgba(15, 23, 42, 0.8);
+  --glass-bg: rgba(15, 21, 38, 0.8);
   --glass-border: rgba(255, 255, 255, 0.1);
   --glass-shadow: rgba(0, 0, 0, 0.5);
 
-  /* Neutral colors for dark mode - properly inverted */
-  --neutral-50: #0f172a;
-  --neutral-100: #1e293b;
-  --neutral-200: #334155;
-  --neutral-300: #475569;
-  --neutral-400: #64748b;
-  --neutral-500: #94a3b8;
-  --neutral-600: #cbd5e1;
-  --neutral-700: #e2e8f0;
-  --neutral-800: #1e293b;
-  --neutral-900: #0f172a;
+  /* Neutral colors for dark mode - properly inverted (cool indigo) */
+  --neutral-50: #0b1120;
+  --neutral-100: #121a2e;
+  --neutral-200: #222c48;
+  --neutral-300: #333e5e;
+  --neutral-400: #55618a;
+  --neutral-500: #7d88ab;
+  --neutral-600: #a6b0cc;
+  --neutral-700: #c8d0e6;
+  --neutral-800: #e2e8f5;
+  --neutral-900: #f2f5fc;
 }
 
 
 body {
-  background: var(--background);
+  background:
+    radial-gradient(1100px 560px at 12% -8%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 60%),
+    radial-gradient(900px 480px at 100% -2%, color-mix(in srgb, var(--accent-2) 12%, transparent), transparent 55%),
+    var(--neutral-50);
+  background-attachment: fixed;
   color: var(--foreground);
   font-family: var(--font-sans);
   font-size: var(--text-body);
@@ -1259,7 +1273,7 @@ button.action-link {
 }
 
 .award-year-group+.award-year-group {
-  margin-top: 1.15rem;
+  margin-top: 1.25rem;
 }
 
 .award-year-heading {
@@ -1267,15 +1281,18 @@ button.action-link {
   grid-template-columns: 92px minmax(0, 1fr);
   align-items: center;
   gap: 1rem;
+  margin-bottom: 0.35rem;
   color: var(--accent-dark);
-  font-size: 0.8125rem;
-  font-weight: 700;
+  font-size: 1.0625rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
   line-height: 1;
 }
 
 .award-year-heading::after {
-  height: 1px;
-  background: var(--neutral-200);
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 55%, transparent), transparent);
   content: '';
 }
 
@@ -1283,28 +1300,21 @@ button.action-link {
   display: grid;
   grid-template-columns: 92px minmax(0, 1fr);
   gap: 1rem;
-  padding: 0.5rem 0;
+  padding: 0.35rem 0;
 }
 
 .award-body {
   min-width: 0;
-  border-bottom: 1px solid var(--neutral-200);
+  border-bottom: 1px solid color-mix(in srgb, var(--neutral-200) 70%, transparent);
 }
 
 .award-body.is-last {
   border-bottom: 0;
 }
 
-.award-month-group {
-  border-top: 1px solid var(--neutral-200);
-}
-
-.award-month-group:first-child {
-  border-top: 0;
-}
-
-.award-year-heading+.award-month-group {
-  border-top: 0;
+/* Months within a year flow with spacing only; the year heading line is the separator. */
+.award-month-group+.award-month-group {
+  margin-top: 0.4rem;
 }
 
 .award-title {
@@ -1418,6 +1428,146 @@ button.action-link {
   border-left: 3px solid var(--accent);
   color: var(--neutral-600);
   background: var(--neutral-50);
+}
+
+/* ============================================================
+   Redesign layer — Ink & Electric Violet
+   Visual skin only; structure/content and the responsive rules
+   below remain authoritative.
+   ============================================================ */
+
+::selection {
+  background: color-mix(in srgb, var(--accent) 24%, transparent);
+  color: var(--foreground);
+}
+
+/* Headings: crisp, tight, heavier */
+.profile-identity h1,
+.about-panel h2,
+.section-title,
+.page-title,
+.research-title,
+.publication-title,
+.timeline-title,
+.news-heading h2,
+.research-teaser-label,
+.publication-year-heading,
+.award-year-heading {
+  letter-spacing: -0.022em;
+  font-weight: 800;
+}
+
+/* Hero name: gradient signature */
+.profile-identity h1 {
+  background: var(--gradient-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.02;
+}
+
+/* Section / page titles: gradient accent rule */
+.section-title,
+.page-title {
+  position: relative;
+  padding-bottom: 0.6rem;
+}
+
+.section-title::after,
+.page-title::after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 48px;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--gradient-brand);
+  content: '';
+}
+
+/* Portrait: framed with soft depth */
+.profile-portrait {
+  border: 1px solid color-mix(in srgb, var(--neutral-200) 80%, transparent);
+  border-radius: 16px;
+  box-shadow: var(--shadow-card);
+}
+
+/* Cards: larger radius + soft layered depth + hover glow */
+.research-card,
+.publication-card {
+  border: 1px solid color-mix(in srgb, var(--neutral-200) 80%, transparent);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+}
+
+.research-card:hover,
+.publication-card:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--accent) 40%, var(--neutral-200));
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* Visual columns: subtle tinted panel */
+.research-visual,
+.publication-visual {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 7%, var(--neutral-100)), var(--neutral-100));
+}
+
+/* Tags & badges */
+.tag-research {
+  border-color: color-mix(in srgb, var(--accent) 32%, transparent);
+  color: var(--accent-dark);
+  background: color-mix(in srgb, var(--accent) 9%, var(--background));
+}
+
+.publication-badges .tag {
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+/* Status label: violet pill */
+.status-label {
+  border: 1px solid color-mix(in srgb, var(--accent) 26%, var(--neutral-200));
+  border-radius: 999px;
+  color: var(--accent-dark);
+  background: color-mix(in srgb, var(--accent) 8%, var(--background));
+  padding-inline: 0.65rem;
+}
+
+/* Buttons / action links: pill + soft fill + lift */
+.profile-actions a,
+.profile-actions button,
+.action-link {
+  border-radius: var(--radius-control);
+  border-color: var(--neutral-200);
+  background: var(--background);
+  box-shadow: 0 1px 2px rgba(16, 22, 40, 0.04);
+  transition: border-color 180ms ease, color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+}
+
+.profile-actions a:hover,
+.profile-actions button:hover,
+.action-link:hover {
+  color: var(--accent-dark);
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--neutral-200));
+  box-shadow: var(--ring-accent);
+  transform: translateY(-1px);
+}
+
+/* Section rhythm: softer hairlines */
+.hero-section,
+.site-section {
+  border-bottom-color: color-mix(in srgb, var(--neutral-200) 60%, transparent);
+}
+
+/* Dark mode body aurora */
+.dark body {
+  background:
+    radial-gradient(1100px 560px at 12% -8%, color-mix(in srgb, var(--accent) 20%, transparent), transparent 60%),
+    radial-gradient(900px 480px at 100% -2%, color-mix(in srgb, var(--accent-2) 16%, transparent), transparent 55%),
+    #070b16;
+  background-attachment: fixed;
 }
 
 @media (max-width: 900px) {
